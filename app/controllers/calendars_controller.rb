@@ -3,7 +3,7 @@ class CalendarsController < ApplicationController
   # １週間のカレンダーと予定が表示されるページ
   def index
     get_week
-    @Plan = Plan.new
+    @plan = Plan.new
   end
 
   # 予定の保存
@@ -15,7 +15,7 @@ class CalendarsController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:date, :plan, :wdays)
+    params.require(:plan).permit(:date, :plan)
   end
 
   def get_week
@@ -35,7 +35,6 @@ class CalendarsController < ApplicationController
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
       wday_num = Date.today.wday + x
-      binding.pry
       if wday_num >= 7 
         wday_num = wday_num - 7
       end
